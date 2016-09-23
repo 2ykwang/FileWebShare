@@ -66,9 +66,31 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Http\Controller\iController.cs" />
+    <Compile Include="Http\View\iView.cs" />
+    <Compile Include="Http\Controller\Controller.cs" />
+    <Compile Include="Http\View\View.cs" />
+    <Compile Include="Http\Collection\HeaderCollection.cs" />
+    <Compile Include="Http\Response\Response.cs" />
+    <Compile Include="Http\Response\ResponseHandler.cs" />
+    <Compile Include="Http\Request\Request.cs" />
+    <Compile Include="Http\Request\RequestHandler.cs" />
+    <Compile Include="Http\Server\ServerListener.cs" />
+    <Compile Include="Http\Server\ServerSetting.cs" />
+    <Compile Include="Http\Server\Server.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Http\" />
+    <Folder Include="Http\Collection\" />
+    <Folder Include="Http\Controller\" />
+    <Folder Include="Http\View\" />
+    <Folder Include="Http\Request\" />
+    <Folder Include="Http\Response\" />
+    <Folder Include="Http\Server\" />
+    <Folder Include="Http\Extension\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
