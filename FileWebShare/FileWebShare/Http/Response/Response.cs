@@ -5,6 +5,7 @@ namespace FileWebShare.Response
 	{
 		public Response()
 		{
+
 		}
 	}
 }

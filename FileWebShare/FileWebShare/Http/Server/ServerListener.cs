@@ -1,10 +1,11 @@
 ﻿using System;
 namespace FileWebShare.Server
 {
-	public class ServerListener
+	public abstract class ServerListener
 	{
 		public ServerListener()
 		{
+
 		}
 	}
 }
