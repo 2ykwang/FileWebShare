@@ -80,6 +80,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Http\Extension\NetworkInfo.cs" />
+    <Compile Include="Http\Route\RouteList.cs" />
+    <Compile Include="Http\Route\RouteGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
