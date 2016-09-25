@@ -26,5 +26,17 @@ namespace FileWebShare.Server
 		/// </summary>
 		/// <value>The default method.</value>
 		public string DefaultMethod { get; set; }
+
+		/// <summary>
+		/// Gets or sets the controller trigger.
+		/// </summary>
+		/// <value>The controller trigger.</value>
+		public string ControllerTrigger { get; set; }
+		가
+		/// <summary>
+		/// Gets or sets the method trigger.
+		/// </summary>
+		/// <value>The method trigger.</value>
+		public string MethodTrigger { get; set; }
 	}
 }
