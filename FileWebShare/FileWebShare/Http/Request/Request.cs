@@ -11,12 +11,18 @@ namespace FileWebShare
 		/// <summary>
 		/// 클라이언트 요청 메소드
 		/// </summary>
-		public string Method { get; private set; }
+		public string Method { get; set; }
 
 		/// <summary>
 		/// 클라이언트 요청 헤더 컬렉션
 		/// </summary>
-		public HeaderCollection HeaderCollection { get; private set; }
+		public HeaderCollection HeaderCollection { get; set; }
+
+		/// <summary>
+		/// Gets the URI.
+		/// </summary>
+		/// <value>The URI.</value>
+		public Uri Uri { get; set; }
 
 		/// <summary>
 		/// 클라이언트 IPv4 주소
@@ -31,7 +37,8 @@ namespace FileWebShare
 		#endregion
 
 		public Request()
-		{ 
+		{
+			HeaderCollection = new HeaderCollection();
 		}
 	}
 }

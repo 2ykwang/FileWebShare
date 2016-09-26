@@ -8,18 +8,18 @@ namespace FileWebShare
 	public abstract class Server
 	{
 		//Thread 
-		private Task _taskListen;
-		private Task _taskAccept;
+		private Task _taskListen = null;
+		private Task _taskAccept = null;
 		 
 
-		public virtual ServerSetting ServerSetting { get; protected set; }
+		public  ServerSetting ServerSetting { get; protected set; }
 		private TcpListener _tcpListener;
 
 		public bool Started { get; private set; }
 
-		public Server(ServerSetting serverSetting)
+		public Server(ServerSetting settings)
 		{
-			ServerSetting = ServerSetting;
+			ServerSetting = settings;
 			Started = false;
 		}
 
@@ -57,6 +57,8 @@ namespace FileWebShare
 		{
 			if (tcpClient.Connected) 
 			{ 
+				
+
 			}
 		}
 	}
