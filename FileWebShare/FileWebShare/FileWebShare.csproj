@@ -55,6 +55,7 @@
     <Compile Include="Http\Response\Response.cs" />
     <Compile Include="Http\Response\ResponseHandler.cs" />
     <Compile Include="Http\Route\Route.cs" />
+    <Compile Include="Http\Route\RouteList.cs" />
     <Compile Include="Http\Server\Server.cs" />
     <Compile Include="Http\Server\ServerListener.cs" />
     <Compile Include="Http\Server\ServerSetting.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Http\View\View.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShareController\TestController.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

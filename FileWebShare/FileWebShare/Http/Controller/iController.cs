@@ -3,7 +3,7 @@
 namespace FileWebShare.Controller
 {
 	public interface iController
-	{
-		
+	{ 
+		void Index();
 	}
 }
