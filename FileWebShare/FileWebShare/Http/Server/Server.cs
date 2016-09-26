@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Sockets; 
 using System.Threading.Tasks;
 using System.IO; 
-namespace FileWebShare.Server
+namespace FileWebShare
 {
 	public abstract class Server
 	{
@@ -25,21 +25,22 @@ namespace FileWebShare.Server
 
 		public bool Start()
 		{
-			if(ServerSetting.IPAdress == null)
+			if(ServerSetting.IPAddress == null)
 				throw new Exception("IPAdress가 NULL 값 입니다. ");
 			if ( ServerSetting.Port == 0)
 				throw new Exception("포트가 지정되어 있지 않습니다.");
 
-			_taskListen = Task.Run(() => ListenThread(ServerSetting.IPAdress, ServerSetting.Port));
+			Started = true;
+			_taskListen = Task.Run(() => ListenThread(ServerSetting.IPAddress, ServerSetting.Port));
 			return true;
 		}
-		private async Task ListenThread(IPAddress ipAddress, int port) // 클라이언트 수신부분
+
+		private async Task ListenThread(IPAddress ipAddress, int port) 
 		{
 			_tcpListener = new TcpListener(ipAddress, port);
-			_tcpListener.Start();
-			  
-			while (Started) // Accept 이 곳에서 클라이언트 접속을 받는다. _start 변수값으로 Loop
-			{
+			_tcpListener.Start(); 
+			while (Started) 
+			{ 
 				try
 				{
 					TcpClient tcpClient = await _tcpListener.AcceptTcpClientAsync();
@@ -52,9 +53,9 @@ namespace FileWebShare.Server
 			}
 		}
 
-		private async Task AcceptHandle(TcpClient tcpClient) //클라이언트 접속 처리 부분
+		private void AcceptHandle(TcpClient tcpClient) 
 		{
-			if (tcpClient.Connected) // 클라이언트가 접속중일 경우
+			if (tcpClient.Connected) 
 			{ 
 			}
 		}

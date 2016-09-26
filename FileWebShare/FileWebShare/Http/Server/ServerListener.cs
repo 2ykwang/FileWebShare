@@ -1,7 +1,7 @@
 ﻿using System;
-namespace FileWebShare.Server
+namespace FileWebShare
 {
-	public abstract class ServerListener : Server
+	public class ServerListener : Server
 	{ 
 
 		public ServerListener(ServerSetting serverSetting) : base(serverSetting)

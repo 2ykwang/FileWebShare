@@ -1,5 +1,5 @@
 ﻿using System;
-namespace FileWebShare.Response
+namespace FileWebShare
 {
 	public class Response
 	{

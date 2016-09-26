@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FileWebShare.Collection
+namespace FileWebShare
 {
 	public class HeaderCollection : System.Collections.DictionaryBase
 	{

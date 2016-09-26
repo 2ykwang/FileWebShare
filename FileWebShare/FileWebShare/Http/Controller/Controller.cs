@@ -1,5 +1,5 @@
 ﻿using System;
-namespace FileWebShare.Controller
+namespace FileWebShare
 {
 	public abstract class Controller : iController
 	{  

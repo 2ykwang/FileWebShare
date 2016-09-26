@@ -22,7 +22,7 @@ namespace FileWebShare
 					{ 
 					}
 				}
-			}*/
+			} 
 			var table = new Route.RouteHandler();
 			Console.WriteLine(table.Routes.Count); 
 			foreach(DictionaryEntry entry in table.Routes)
@@ -30,7 +30,22 @@ namespace FileWebShare
 				var route = (Route.Route)entry.Value;
 				Console.WriteLine("" + route.ControllerName);
 			}
-			Console.WriteLine( ((Route.Route) table.Routes["Test"]).Methods[0]);
+			Console.WriteLine( ((Route.Route) table.Routes["Test"]).Methods[0]);*/
+
+			ServerSetting setting = new ServerSetting
+			{
+				ControllerTrigger = "c",
+				MethodTrigger = "m",
+				DefaultController = "View",
+				DefaultMethod = "Index",
+				IPAddress = IPAddress.Any,
+				RouteList = new RouteList(),
+				Port = 5555
+			};
+
+			ServerListener Listener = new ServerListener(setting);
+
+			Listener.Start(); 
 		}
 	} 
 }

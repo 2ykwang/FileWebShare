@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace FileWebShare.Extension
+namespace FileWebShare
 {
 	public class NetworkInfo
 	{ 

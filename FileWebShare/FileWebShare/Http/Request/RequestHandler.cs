@@ -1,5 +1,5 @@
 ﻿using System;
-namespace FileWebShare.Request
+namespace FileWebShare
 {
 	public class RequestHandler
 	{

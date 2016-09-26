@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3E8F5478-D246-4F70-84F3-05220DFC8790}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FileWebShare</RootNamespace>
     <AssemblyName>FileWebShare</AssemblyName>
@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,10 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Http\Client\Client.cs" />
     <Compile Include="Http\Collection\HeaderCollection.cs" />
     <Compile Include="Http\Controller\Controller.cs" />
     <Compile Include="Http\Controller\iController.cs" />
-    <Compile Include="Http\Extension\Uri.cs" />
+    <Compile Include="Http\Extension\NetworkInfo.cs" />
     <Compile Include="Http\Request\Request.cs" />
     <Compile Include="Http\Request\RequestHandler.cs" />
     <Compile Include="Http\Response\Response.cs" />

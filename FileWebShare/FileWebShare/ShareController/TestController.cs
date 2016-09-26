@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FileWebShare.Controller;
 
 namespace FileWebShare
 {
-	class TestController : FileWebShare.Controller.Controller
+	class TestController : Controller
 	{
 		public override void Index()
 		{

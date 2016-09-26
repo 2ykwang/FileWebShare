@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FileWebShare.Controller
+namespace FileWebShare
 {
 	public interface iController
 	{ 

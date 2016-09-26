@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Net;
 
-using FileWebShare.Collection;
 
-
-namespace FileWebShare.Request
+namespace FileWebShare
 {
 	public class Request
 	{

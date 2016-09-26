@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FileWebShare.View
+namespace FileWebShare
 {
 	public interface iView
 	{

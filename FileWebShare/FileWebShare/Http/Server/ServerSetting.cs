@@ -1,5 +1,6 @@
 ﻿using System;
-namespace FileWebShare.Server
+
+namespace FileWebShare
 {
 	public class ServerSetting
 	{
@@ -32,11 +33,17 @@ namespace FileWebShare.Server
 		/// </summary>
 		/// <value>The controller trigger.</value>
 		public string ControllerTrigger { get; set; }
-		
+
 		/// <summary>
 		/// Gets or sets the method trigger.
 		/// </summary>
 		/// <value>The method trigger.</value>
 		public string MethodTrigger { get; set; }
+
+		/// <summary>
+		/// Route List 값을 정하거나 가져옵니다.
+		/// </summary>
+		/// <value>The Route list.</value>
+		public RouteList RouteList { get; set; }
 	}
 }
