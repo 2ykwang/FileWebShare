@@ -42,8 +42,9 @@ namespace FileWebShare
 						response: _client.Response,
 						request: _client.Request
 						);
-					instance.Initialize(clientData); 
-					method.Invoke(instance, null);
+					instance.Initialize(clientData);
+					 
+					method.Invoke(instance, _client.Response.RequestRoute.Parameters);
 				}
 				else
 				{

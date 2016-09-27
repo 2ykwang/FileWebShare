@@ -23,8 +23,20 @@ namespace FileWebShare.ShareController
 </html>
 				"); 
 		}
-		public void test(string test, string ee)
-		{ 
+		public void test(string test, string test2)
+		{
+			SetHtml(
+				$@"
+<!DOCTYPE HTML>
+<html>
+	<head>
+	</head>
+	<body>
+		test Value = {test}<br/>
+		test2 Value = {test2}
+	</body>
+</html>
+				");
 		}
 	}
 }

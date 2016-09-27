@@ -15,7 +15,7 @@ namespace FileWebShare
 		protected void SetHtml(string htmlText)
 		{
 			ClientData.Response.Body = htmlText;
-			ClientData.Response.Headers["Content-Type"] = "text/html;";
+			ClientData.Response.Headers["Content-Type"] = "text/html; charset=utf-8";
 			ClientData.Response.Headers["Content-Length"] = htmlText.Length.ToString();
 		}
 

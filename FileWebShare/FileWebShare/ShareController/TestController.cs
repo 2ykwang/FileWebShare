@@ -10,13 +10,8 @@ namespace FileWebShare
 	{
 		public override void Index()
 		{
-			 
-			Console.WriteLine("test");
+			  
 			
-		}
-		public void test()
-		{
-
-		}
+		} 
 	}
 }
