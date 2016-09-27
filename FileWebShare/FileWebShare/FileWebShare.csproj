@@ -54,8 +54,8 @@
     <Compile Include="Http\Controller\Controller.cs" />
     <Compile Include="Http\Controller\iController.cs" />
     <Compile Include="Http\Extension\NetworkInfo.cs" />
+    <Compile Include="Http\HttpHandler.cs" />
     <Compile Include="Http\Request\Request.cs" />
-    <Compile Include="Http\Request\RequestHandler.cs" />
     <Compile Include="Http\Response\Response.cs" />
     <Compile Include="Http\Response\ResponseHandler.cs" />
     <Compile Include="Http\Route\Route.cs" />
@@ -63,8 +63,6 @@
     <Compile Include="Http\Server\Server.cs" />
     <Compile Include="Http\Server\ServerListener.cs" />
     <Compile Include="Http\Server\ServerSetting.cs" />
-    <Compile Include="Http\View\iView.cs" />
-    <Compile Include="Http\View\View.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShareController\TestController.cs" />

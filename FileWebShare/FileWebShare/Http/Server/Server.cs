@@ -9,18 +9,18 @@ namespace FileWebShare
 	{
 		//Thread 
 		private Task _taskListen = null;
-		private Task _taskAccept = null;
-		 
+		private Task _taskAccept = null; 
+		
+		private TcpListener _tcpListener; 
 
-		public  ServerSetting ServerSetting { get; protected set; }
-		private TcpListener _tcpListener;
+		public ServerSetting ServerSetting { get; protected set; }
 
 		public bool Started { get; private set; }
 
 		public Server(ServerSetting settings)
 		{
 			ServerSetting = settings;
-			Started = false;
+			Started = false; 
 		}
 
 		public bool Start()
@@ -42,8 +42,8 @@ namespace FileWebShare
 			while (Started) 
 			{ 
 				try
-				{
-					TcpClient tcpClient = await _tcpListener.AcceptTcpClientAsync();
+				{ 
+					TcpClient tcpClient = await _tcpListener.AcceptTcpClientAsync(); 
 					_taskAccept = Task.Run(() => AcceptHandle(tcpClient));
 				}
 				catch (SocketException e)
@@ -56,9 +56,13 @@ namespace FileWebShare
 		private void AcceptHandle(TcpClient tcpClient) 
 		{
 			if (tcpClient.Connected) 
-			{ 
-				
+			{
+				ResponseHandler responseHandler =  new ResponseHandler(ServerSetting, tcpClient);
 
+				responseHandler.RequestProcess();
+
+				
+				tcpClient.Close(); 
 			}
 		}
 	}

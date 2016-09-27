@@ -54,6 +54,7 @@ namespace FileWebShare
 				return controllerName.Substring(0, controllerName.IndexOf("Controller"));
 			}
 			throw new Exception($"지원하지 않는 컨트롤 이름입니다 {controllerName}");
-		} 
+		}
+
 	}
 }

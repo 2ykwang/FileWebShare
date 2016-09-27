@@ -19,6 +19,11 @@ namespace FileWebShare
 		public HeaderCollection HeaderCollection { get; set; }
 
 		/// <summary>
+		/// 클라이언트 요청 Body
+		/// </summary>
+		public string Body { get; set; }
+
+		/// <summary>
 		/// Gets the URI.
 		/// </summary>
 		/// <value>The URI.</value>
