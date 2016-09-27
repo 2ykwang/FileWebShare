@@ -46,7 +46,10 @@ namespace FileWebShare
 			ServerListener Listener = new ServerListener(setting);
 
 			Listener.Start();
-			Console.Read();
+			while (true)
+			{
+				System.Threading.Thread.Sleep(1000);
+			}
 		}
 	} 
 }

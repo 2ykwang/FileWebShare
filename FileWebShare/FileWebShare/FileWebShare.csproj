@@ -47,6 +47,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Http\Client\Client.cs" />
@@ -85,6 +86,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Http\Request\RequestGenerator.cs" />
+    <Compile Include="Http\Response\ResponseGenerator.cs" />
+    <Compile Include="Http\Collection\HttpParameter.cs" />
+    <Compile Include="Http\Collection\HttpGetCollection.cs" />
+    <Compile Include="Http\Collection\HttpPostCollection.cs" />
+    <Compile Include="Http\Route\RequestRoute.cs" />
+    <Compile Include="Http\Response\ResponseCode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

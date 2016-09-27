@@ -9,9 +9,11 @@ namespace FileWebShare
 
 		public string ContentType { get; set; }
 
-		public string body { get; set; }
+		public string Body { get; set; }
 
-		public bool isFile { get; set; } 
+		public bool isFile { get; set; }
+
+		public ResponseCode ResponseCode { get; set; }
 
 		public Response()
 		{

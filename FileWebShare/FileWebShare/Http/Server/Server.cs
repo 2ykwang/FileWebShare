@@ -57,9 +57,10 @@ namespace FileWebShare
 		{
 			if (tcpClient.Connected) 
 			{
-				ResponseHandler responseHandler =  new ResponseHandler(ServerSetting, tcpClient);
+				HttpHandler httpHandler =  new HttpHandler(tcpClient, ServerSetting);
 
-				responseHandler.RequestProcess();
+				httpHandler.RequestProcess();
+
 
 				
 				tcpClient.Close(); 

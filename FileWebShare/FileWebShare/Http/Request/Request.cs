@@ -16,7 +16,7 @@ namespace FileWebShare
 		/// <summary>
 		/// 클라이언트 요청 헤더 컬렉션
 		/// </summary>
-		public HeaderCollection HeaderCollection { get; set; }
+		public HeaderCollection HeaderCollection { get; private set; }
 
 		/// <summary>
 		/// 클라이언트 요청 Body

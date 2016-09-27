@@ -9,18 +9,27 @@ namespace FileWebShare
 {
 	class HttpHandler
 	{
-		public ServerSetting ServerSetting { get; private set; }
-		public TcpClient TcpClient { get; private set; }
+		private ServerSetting _serverSetting;
+		private TcpClient _tcpClient;
+
 
 		public HttpHandler(TcpClient tcpClient, ServerSetting serverSetting)
 		{
-			TcpClient = tcpClient;
-			ServerSetting = serverSetting;
+			_tcpClient = tcpClient;
+			_serverSetting = serverSetting;
 		}
 
 		public void RequestProcess()
 		{
-			
+			Client client = new Client(_tcpClient, new Request(), new Response());
+
+			RequestGenerator requestGenerator = new RequestGenerator(_serverSetting);
+			requestGenerator.Process(_tcpClient, client.Request);
+
+			Console.WriteLine(client.Request.HeaderCollection.ToString());
+			ResponseGenerator responseGenerator = new ResponseGenerator(_serverSetting, client.Request);
+			responseGenerator.Process(client.Response);
+			 
 		}
 	}
 }
