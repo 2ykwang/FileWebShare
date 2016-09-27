@@ -3,7 +3,7 @@ namespace FileWebShare
 {
 	public class Response
 	{  
-		public HeaderCollection Headers { get; set; }
+		public HeaderCollection Headers { get; private set; }
 		 
 
 		public string Body { get; set; } 

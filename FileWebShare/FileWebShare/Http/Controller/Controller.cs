@@ -3,11 +3,25 @@ namespace FileWebShare
 {
 	public abstract class Controller : iController
 	{
-		public Client Client { get;  private set; }
+		 
+		public ClientData ClientData { get;  private set; }
 
-		public void Initialize(Client client)
+
+		protected void Redirect(string url)
 		{
-			Client = client;
+			ClientData.Response.ResponseCode = ResponseCode.Moved;
+			ClientData.Response.Headers["Location"] = url;
+		}
+		protected void SetHtml(string htmlText)
+		{
+			ClientData.Response.Body = htmlText;
+			ClientData.Response.Headers["Content-Type"] = "text/html;";
+			ClientData.Response.Headers["Content-Length"] = htmlText.Length.ToString();
+		}
+
+		public void Initialize(ClientData clientData)
+		{
+			ClientData = clientData;
 		}
 		public abstract void Index();
 	}

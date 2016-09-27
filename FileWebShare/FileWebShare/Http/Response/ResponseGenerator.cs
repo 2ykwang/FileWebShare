@@ -36,7 +36,8 @@ namespace FileWebShare
 		private void InitializeResponse(Response response)
 		{ 
 			response.Headers["Server"] = ServerSetting.ServerName;
-			response.Headers["Connection"] = "close"; 
+			response.Headers["Connection"] = "close";
+			response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
 		}
 	}
 }

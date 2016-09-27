@@ -23,6 +23,11 @@ namespace FileWebShare
 			networkStream.Read(buf, 0, buf.Length); 
 			string requestString = Encoding.ASCII.GetString(buf);
 
+			if(requestString.IndexOf("\r\n\r\n") == -1)
+			{// 정상적인 요청이 아닐경우
+				tcpClient.Close();
+				return;
+			}
 			string headerString = requestString.Substring(0, requestString.IndexOf("\r\n\r\n"));
 
 			string method = requestString.Substring(0, 4).Trim();

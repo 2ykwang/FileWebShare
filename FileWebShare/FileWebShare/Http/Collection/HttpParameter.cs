@@ -24,12 +24,14 @@ namespace FileWebShare
 
 		public  bool Contains(string key)
 		{
-			return Dictionary.Contains(key);
+			if (key != null)
+				return Dictionary.Contains(key);
+			else return false;
 		}
 
 		public void Add(string headerName, string headerValue)
 		{
-			if (!Contains(headerName))
+			if (headerName != null && headerName.Length > 0 && !Contains(headerName) )
 			{
 				Dictionary.Add(headerName, headerValue);
 			}

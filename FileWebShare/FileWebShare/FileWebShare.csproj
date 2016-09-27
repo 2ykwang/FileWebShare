@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Http\Client\Client.cs" />
+    <Compile Include="Http\Client\ClientData.cs" />
     <Compile Include="Http\Collection\HeaderCollection.cs" />
     <Compile Include="Http\Controller\Controller.cs" />
     <Compile Include="Http\Controller\iController.cs" />
