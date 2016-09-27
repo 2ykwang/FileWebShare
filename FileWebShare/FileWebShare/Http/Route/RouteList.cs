@@ -20,8 +20,8 @@ namespace FileWebShare
 		private Hashtable GetAllRoutes()
 		{
 			Hashtable routes = new Hashtable();
-			Assembly mscorlib = Assembly.GetExecutingAssembly();
-			foreach (Type type in mscorlib.GetTypes())
+			Assembly assem = Assembly.GetExecutingAssembly();
+			foreach (Type type in assem.GetTypes())
 			{
 				if (type.IsSubclassOf(typeof(Controller)))
 				{

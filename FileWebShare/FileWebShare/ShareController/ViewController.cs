@@ -23,7 +23,7 @@ namespace FileWebShare.ShareController
 </html>
 				"); 
 		}
-		public void test()
+		public void test(string test, string ee)
 		{ 
 		}
 	}

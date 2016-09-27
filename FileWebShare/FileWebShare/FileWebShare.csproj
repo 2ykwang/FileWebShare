@@ -65,6 +65,8 @@
     <Compile Include="Http\Server\Server.cs" />
     <Compile Include="Http\Server\ServerListener.cs" />
     <Compile Include="Http\Server\ServerSetting.cs" />
+    <Compile Include="Http\URIRouting\UriData.cs" />
+    <Compile Include="Http\URIRouting\UriRoute.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShareController\TestController.cs" />

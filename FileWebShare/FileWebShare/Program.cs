@@ -12,6 +12,7 @@ namespace FileWebShare
     { 
         static void Main()
         { 
+
 			ServerSetting setting = new ServerSetting
 			{
 				ControllerTrigger = "c",

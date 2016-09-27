@@ -56,7 +56,7 @@ namespace FileWebShare
 			}
 			if (request.HeaderCollection.Contains("Host"))
 			{ 
-				Uri uri = new Uri($"http://{request.HeaderCollection["Host"]}{path}");
+				UriData uri = new UriData($"http://{request.HeaderCollection["Host"]}{path}");
 				string body = requestString.Substring(requestString.IndexOf("\r\n\r\n") + 4);
 				request.Body = body;
 				request.HTTPVersion = version;

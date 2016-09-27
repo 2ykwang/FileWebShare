@@ -27,7 +27,7 @@ namespace FileWebShare
 		/// Gets the URI.
 		/// </summary>
 		/// <value>The URI.</value>
-		public Uri Uri { get; set; }
+		public UriData Uri { get; set; }
 
 		/// <summary>
 		/// 클라이언트 IPv4 주소
