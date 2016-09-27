@@ -13,7 +13,7 @@ namespace FileWebShare
 
 		public Response Response { get; private set; }
 
-		public TcpClient TcpClient { get; private set; }
+		public TcpClient TcpClient { get; private set; } 
 
 		public Client(TcpClient client, Request request, Response response)
 		{

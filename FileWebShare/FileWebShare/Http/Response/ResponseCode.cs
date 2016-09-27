@@ -30,11 +30,11 @@ namespace FileWebShare
 			{511,"511 Network Authentication Required"}
 		};
 
-		public static string GetResponseTextFromCode(int code)
+		public static string GetResponseTextFromCode(ResponseCode code)
 		{
-			if (_responseCodeText.ContainsKey(code))
+			if (_responseCodeText.ContainsKey((int)code))
 			{
-				return _responseCodeText[code];
+				return _responseCodeText[(int)code];
 			}
 			else throw new Exception("Unknown response code");
 		}

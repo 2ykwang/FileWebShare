@@ -13,13 +13,16 @@ namespace FileWebShare
 		public string this[string key]
 		{
 			get
+			{ 
+				return (string)Dictionary[key]; 
+			}
+			set
 			{
-				if (Dictionary.Contains(key))
-				{
-					return (string)Dictionary[key];
-				}
-				else return null;
-			} 
+				if (!Dictionary.Contains(key))
+					Dictionary.Add(key, "");
+				Dictionary[key] = value;
+
+			}
 		}
 
 		public bool Contains(string key)

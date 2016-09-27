@@ -40,7 +40,8 @@ namespace FileWebShare
 				DefaultMethod = "Index",
 				IPAddress = IPAddress.Any,
 				RouteList = new RouteList(),
-				Port = 5555
+				Port = 5555,
+				ServerName ="File Web Share"
 			};
 
 			ServerListener Listener = new ServerListener(setting);

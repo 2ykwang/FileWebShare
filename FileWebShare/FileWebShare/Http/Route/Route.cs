@@ -7,18 +7,19 @@ using System.Collections;
 
 namespace FileWebShare
 {
-	class Route
+	public class Route
 	{ 
 
 		public string ControllerName { get; private set; }
 
 		public List<string> Methods { get; private set; }
 
-		public Route(List<string> methods, string controllerName)
+		public Type Type { get; private set; }
+		public Route(List<string> methods, Type type, string controllerName)
 		{
 			Methods = methods;
+			Type = type;
 			ControllerName = controllerName; 
-		}
-
+		} 
 	}
 }

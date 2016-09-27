@@ -3,8 +3,11 @@ namespace FileWebShare
 {
 	public abstract class Controller : iController
 	{
-		public Controller()
+		public Client Client { get;  private set; }
+
+		public void Initialize(Client client)
 		{
+			Client = client;
 		}
 		public abstract void Index();
 	}

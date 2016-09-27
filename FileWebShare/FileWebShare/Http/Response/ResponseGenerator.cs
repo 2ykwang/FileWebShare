@@ -17,7 +17,26 @@ namespace FileWebShare
 
 		public void Process(Response response)
 		{
-			
-		} 
+			InitializeResponse(response);
+			 
+			HttpGetCollection getCollection = new HttpGetCollection();
+			getCollection.AddParameterFromQueryString(Request.Uri.Query);
+
+			RequestRoute requestRoute = new RequestRoute();
+
+			//컨트롤러 인자가 전잘되지 않았을경우 기본인자로 세팅 
+			requestRoute.ControllerName = getCollection.Contains(ServerSetting.ControllerTrigger) ?
+				 getCollection[ServerSetting.ControllerTrigger] : ServerSetting.DefaultController;
+
+			requestRoute.ControllerMethod = getCollection.Contains(ServerSetting.MethodTrigger) ?
+				 getCollection[ServerSetting.MethodTrigger] : ServerSetting.DefaultMethod;
+
+			response.RequestRoute = requestRoute;
+		}
+		private void InitializeResponse(Response response)
+		{ 
+			response.Headers["Server"] = ServerSetting.ServerName;
+			response.Headers["Connection"] = "close"; 
+		}
 	}
 }

@@ -60,9 +60,7 @@ namespace FileWebShare
 				HttpHandler httpHandler =  new HttpHandler(tcpClient, ServerSetting);
 
 				httpHandler.RequestProcess();
-
-
-				
+				 
 				tcpClient.Close(); 
 			}
 		}

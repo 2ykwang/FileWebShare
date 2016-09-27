@@ -28,6 +28,7 @@ namespace FileWebShare
 					 
 					Route route = new Route(
 						methods: GetAllMethods(type),
+						type: type,
 						controllerName: GetControllerName(type.Name)
 					); 
 					routes.Add(route.ControllerName, route); 
@@ -56,5 +57,13 @@ namespace FileWebShare
 			throw new Exception($"지원하지 않는 컨트롤 이름입니다 {controllerName}");
 		}
  
+		public Route HasController(string controllerName)
+		{
+			if (Routes.ContainsKey(controllerName))
+			{
+				return (Route)Routes[controllerName];
+			}
+			else return null;
+		}
 	}
 }

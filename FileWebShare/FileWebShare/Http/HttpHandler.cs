@@ -29,7 +29,14 @@ namespace FileWebShare
 			Console.WriteLine(client.Request.HeaderCollection.ToString());
 			ResponseGenerator responseGenerator = new ResponseGenerator(_serverSetting, client.Request);
 			responseGenerator.Process(client.Response);
-			 
+
+			ResponseHandler responseHandler = new ResponseHandler
+				(
+					serverSetting: _serverSetting,
+					client: client
+				);
+
+			responseHandler.RequestProcess();
 		}
 	}
 }

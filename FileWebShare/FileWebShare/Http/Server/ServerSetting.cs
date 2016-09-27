@@ -45,5 +45,10 @@ namespace FileWebShare
 		/// </summary>
 		/// <value>The Route list.</value>
 		public RouteList RouteList { get; set; }
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		public string ServerName { get; set; }
 	}
 }
