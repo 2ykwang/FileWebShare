@@ -19,24 +19,21 @@ namespace FileWebShare.ShareController
 	</head>
 	<body>
 		Index Page
+<a href ='/test2'>test</a>
 	</body>
-</html>
+</html> 
 				"); 
 		}
 		public void test(string test, string test2)
-		{ 
-			WriteHtml(
-				$@"
-<!DOCTYPE HTML>
-<html>
-	<head>
-	</head>
-	<body>
-		View 컨트롤러를 사용하여 Test 메소드를 요청했고 <br/>
-		{test}를 변수로 넘겼다 이기야~! 
-	</body>
-</html>
-				");
+		{
+			for (int i = 0; i < 1000000; i++)
+			{
+				WriteHtml(i.ToString());
+			}
+		}
+		public void test2()
+		{
+			SetFile(@"C:\Users\csdp0\Downloads\Home.Alone.2.Lost.in.New.York.1992.720p.BluRay.x264.YIFY.mp4");
 		}
 	}
 }

@@ -22,7 +22,7 @@ namespace FileWebShare
 				MethodTrigger = "m",
 				DefaultController = "View",
 				DefaultMethod = "Index",
-				BufferSize = 2048,
+				BufferSize = 5000,
 				IPAddress = IPAddress.Any,
 				RouteList = new RouteList(),
 				Port = 5555,

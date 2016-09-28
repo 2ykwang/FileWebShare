@@ -25,7 +25,8 @@ namespace FileWebShare
 			{"ttf", "application/x-font-truetype"},
 			{"svg", "image/svg+xml"},
 			{"txt", "text/plain"},
-			{"exe", "application/octet-stream"}
+			{"exe", "application/octet-stream"},
+			{"mp4", "video/mp4" }
 		};
 		public static string GetMime(string requestFile)
 		{

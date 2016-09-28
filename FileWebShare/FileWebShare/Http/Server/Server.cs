@@ -38,30 +38,40 @@ namespace FileWebShare
 		private async Task ListenThread(IPAddress ipAddress, int port) 
 		{
 			_tcpListener = new TcpListener(ipAddress, port);
-			_tcpListener.Start(); 
+			_tcpListener.Start(5); 
 			while (Started) 
 			{ 
 				try
-				{ 
+				{   
 					TcpClient tcpClient = await _tcpListener.AcceptTcpClientAsync(); 
-					_taskAccept = Task.Run(() => AcceptHandle(tcpClient));
+					_taskAccept = Task.Run(() => AcceptHandle(tcpClient));  
 				}
 				catch (SocketException e)
-				{
-					Console.WriteLine(e.ToString());
+				{ 
 				}
 			}
 		}
 
 		private void AcceptHandle(TcpClient tcpClient) 
 		{
-			if (tcpClient.Connected) 
-			{
-				HttpHandler httpHandler =  new HttpHandler(tcpClient, ServerSetting);
+			using (tcpClient)
+			{ 
+				try
+				{
+					HttpHandler httpHandler = new HttpHandler(tcpClient, ServerSetting);
 
-				httpHandler.RequestProcess();
-				 
-				tcpClient.Close(); 
+					if (tcpClient.Client.Poll(60000, SelectMode.SelectRead))
+					{
+						httpHandler.RequestProcess();
+					}
+					tcpClient.Close();
+				}
+				catch(Exception e)
+				{
+#if DEBUG
+					Console.WriteLine(e.ToString());
+#endif
+				} 
 			}
 		}
 	}

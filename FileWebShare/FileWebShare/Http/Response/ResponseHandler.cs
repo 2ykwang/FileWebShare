@@ -28,8 +28,8 @@ namespace FileWebShare
 			Route route = _serverSetting.RouteList.HasController(_client.Response.RequestRoute.ControllerName); 
 
 #if DEBUG
-			Console.WriteLine(_client.Request.HeaderCollection.ToString());
-			Console.WriteLine($"요청 컨트롤러 {_client.Response.RequestRoute.ControllerName} 요청 메소드: {_client.Response.RequestRoute.ControllerMethod}");
+			//Console.WriteLine(_client.Request.HeaderCollection.ToString());
+			//Console.WriteLine($"요청 컨트롤러 {_client.Response.RequestRoute.ControllerName} 요청 메소드: {_client.Response.RequestRoute.ControllerMethod}");
 #endif
 			if (route == null || !route.Methods.Contains(_client.Response.RequestRoute.ControllerMethod))
 			{ 
@@ -74,26 +74,26 @@ namespace FileWebShare
 			else
 			{
 				buf = System.Text.Encoding.UTF8.GetBytes(client.Response.Body.ToString());
-
+				client.Response.Body = null;
 				int offset = 0,
 					sendBufLength = 0,
-					bufLength = buf.Length;
+					bufLength = buf.Length; 
 
-				while(offset < bufLength )
+				while(offset < bufLength && _client.TcpClient.Client.Connected)
 				{ 
-					sendBufLength = (offset + _serverSetting.BufferSize - bufLength < 1)?
-						_serverSetting.BufferSize: bufLength-offset ;
+					sendBufLength = (offset + _serverSetting.BufferSize - bufLength < 1) ?
+					_serverSetting.BufferSize : bufLength - offset;
 
-					Console.WriteLine(sendBufLength);
-
-					SendData(networkStream, buf, offset, sendBufLength);
-					offset += sendBufLength;
-
-
+					//Console.WriteLine(sendBufLength); 
+					if(SendData(networkStream, buf, offset, sendBufLength) == false)
+					{
+						break;
+					}
+					offset += sendBufLength; 
 				}
 			}
 			//Send body
-			networkStream.Close();
+			networkStream.Close(); 
 		}
 
 		private void InitializeResponse(Response response)
@@ -123,19 +123,21 @@ namespace FileWebShare
 			return header;
 		}
 		 
-		private static void SendData(Stream stream, byte[] data,int offset,int length)
+		private bool SendData( Stream  stream, byte[] data,int offset,int length)
 		{
 			try
 			{
-				if (stream != null)
+				if (stream != null && _client.TcpClient.Client.Connected && _client.TcpClient.Client.Poll(60000,SelectMode.SelectWrite))
 				{
 					stream.Write(data, 0, data.Length);
-					stream.Flush();
+					stream.Flush(); 
 				}
+				return true;
 			}
-			catch (System.Exception e)
+			catch 
 			{
-				System.Console.WriteLine("SendData Error: " + e.ToString());
+				//데이터 전송도중 연결 끊김 
+				return false;
 			}
 		}
 
@@ -148,8 +150,8 @@ namespace FileWebShare
 			while ((readBytes = binReader.ReadBytes(_serverSetting.BufferSize)).Length > 0)
 			{
 				try
-				{
-					SendData(stream, readBytes,0 ,readBytes.Length);
+				{  
+					SendData(stream, readBytes, 0, readBytes.Length);  
 				}
 				catch (IOException)
 				{
@@ -157,7 +159,7 @@ namespace FileWebShare
 					break;
 				}
 			}
-			binReader.Close();
+			binReader.Close(); 
 		}
 	}
 }
