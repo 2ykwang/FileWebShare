@@ -26,20 +26,14 @@ namespace FileWebShare
 			Route route = _serverSetting.RouteList.HasController(_client.Response.RequestRoute.ControllerName);
 
 #if DEBUG
+			Console.WriteLine(_client.Request.HeaderCollection.ToString());
 			Console.WriteLine($"요청 컨트롤러 {_client.Response.RequestRoute.ControllerName} 요청 메소드: {_client.Response.RequestRoute.ControllerMethod}");
 #endif
 			if (route == null || !route.Methods.Contains(_client.Response.RequestRoute.ControllerMethod))
 			{ 
 				SetNotFound(_client.Response);
 				return;
-			}
-
-			if (_client.Response.isFile == true && !File.Exists(_client.Response.FilePath))
-			{
-				//File Not Found
-				SetNotFound(_client.Response);
-				return;
-			}
+			}  
 
 			_client.Response.ResponseCode = ResponseCode.Ok;
 
@@ -47,8 +41,15 @@ namespace FileWebShare
 
 			Controller instance = (Controller)route.Type.GetConstructor(new Type[] { }).Invoke(new object[] { });  
 			instance.Initialize(_client);
-			 
-			method.Invoke(instance, _client.Response.RequestRoute.Parameters); 
+			//컨트롤러 메소드 호출
+			method.Invoke(instance, _client.Response.RequestRoute.Parameters);
+
+			if (_client.Response.isFile == true && !File.Exists(_client.Response.FilePath))
+			{
+				//File Not Found
+				SetNotFound(_client.Response);
+				return;
+			} 
 		}
 
 
@@ -103,7 +104,10 @@ namespace FileWebShare
 			_client.Response.ResponseCode = ResponseCode.NotFound;
 			_client.Response.Headers["Content-Type"] = "text/html charset=utf8";
 			_client.Response.Headers["Content-Length"] = data.Length.ToString();
-			_client.Response.Body = data; 
+			_client.Response.Body = data;
+
+			_client.Response.FilePath = "";
+			_client.Response.isFile = false; 
 		}
 
 		private string ResponseHeaderBuilder(HeaderCollection headerCollection, ResponseCode code)

@@ -25,8 +25,7 @@ namespace FileWebShare.ShareController
 		}
 		public void test(string test, string test2)
 		{
-			ClientData.Response.FilePath = @"/Users/YYG/Downloads/XamarinStudio-5.10.1.6-0.dmg";
-			ClientData.Response.isFile = true;
+			SetFile(@"D:\개발\Projects\GnuboardExtractor\GnuboardExtractor\bin\Debug\그누보드 등록기.exe"); 
 		}
 	}
 }

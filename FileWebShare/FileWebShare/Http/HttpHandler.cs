@@ -25,8 +25,7 @@ namespace FileWebShare
 
 			RequestGenerator requestGenerator = new RequestGenerator(_serverSetting);
 			requestGenerator.Process(_tcpClient, client.Request);
-
-			Console.WriteLine(client.Request.HeaderCollection.ToString());
+			  
 			ResponseGenerator responseGenerator = new ResponseGenerator(_serverSetting, client.Request);
 			responseGenerator.Process(client.Response);
 
