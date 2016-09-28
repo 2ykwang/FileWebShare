@@ -28,34 +28,30 @@ namespace FileWebShare
 #if DEBUG
 			Console.WriteLine($"요청 컨트롤러 {_client.Response.RequestRoute.ControllerName} 요청 메소드: {_client.Response.RequestRoute.ControllerMethod}");
 #endif
-			if (route != null) 
-			{ 
-				if(route.Methods.Contains(_client.Response.RequestRoute.ControllerMethod))
-				{
-					_client.Response.ResponseCode = ResponseCode.Ok;
-
-					var method = route.Type.GetMethod(_client.Response.RequestRoute.ControllerMethod);
-
-					Controller instance = (Controller)route.Type.GetConstructor(new Type[] { }).Invoke(new object[] { });
-					ClientData clientData = new ClientData
-						(
-						response: _client.Response,
-						request: _client.Request
-						);
-					instance.Initialize(clientData);
-					 
-					method.Invoke(instance, _client.Response.RequestRoute.Parameters);
-				}
-				else
-				{
-					SetNotFound(_client.Response);
-				}
-			}
-			else // 존재하지 않는 컨트롤 이름
+			if (route == null || !route.Methods.Contains(_client.Response.RequestRoute.ControllerMethod))
 			{ 
 				SetNotFound(_client.Response);
+				return;
 			}
+
+			if (_client.Response.isFile == true && !File.Exists(_client.Response.FilePath))
+			{
+				//File Not Found
+				SetNotFound(_client.Response);
+				return;
+			}
+
+			_client.Response.ResponseCode = ResponseCode.Ok;
+
+			var method = route.Type.GetMethod(_client.Response.RequestRoute.ControllerMethod);
+
+			Controller instance = (Controller)route.Type.GetConstructor(new Type[] { }).Invoke(new object[] { });  
+			instance.Initialize(_client);
+			 
+			method.Invoke(instance, _client.Response.RequestRoute.Parameters); 
 		}
+
+
 		private void SendResponse(Client client)
 		{
 			NetworkStream networkStream = client.TcpClient.GetStream();
@@ -69,7 +65,7 @@ namespace FileWebShare
 
 			if(client.Response.isFile)
 			{
-				SendFile(@"C:\Users\csdp0\Downloads\Home.Alone.2.Lost.in.New.York.1992.720p.BluRay.x264.YIFY.mp4", networkStream);
+				SendFile(client.Response.FilePath, networkStream);
 			}
 			else
 			{ 
@@ -79,7 +75,9 @@ namespace FileWebShare
 			//Send body
 			networkStream.Close();
 		}
-		public void SendFile(string path,Stream networkStream)
+
+
+		private void SendFile(string path,Stream networkStream)
 		{ 
 			BinaryReader binReader = new BinaryReader(new StreamReader(path).BaseStream);
 
@@ -116,7 +114,7 @@ namespace FileWebShare
 		}
 
 
-		public static void SendData(byte[] data, Stream stream)
+		private static void SendData(byte[] data, Stream stream)
 		{
 			try
 			{

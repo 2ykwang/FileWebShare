@@ -25,18 +25,8 @@ namespace FileWebShare.ShareController
 		}
 		public void test(string test, string test2)
 		{
-			SetHtml(
-				$@"
-<!DOCTYPE HTML>
-<html>
-	<head>
-	</head>
-	<body>
-		test Value = {test}<br/>
-		test2 Value = {test2}
-	</body>
-</html>
-				");
+			ClientData.Response.FilePath = @"/Users/YYG/Downloads/XamarinStudio-5.10.1.6-0.dmg";
+			ClientData.Response.isFile = true;
 		}
 	}
 }

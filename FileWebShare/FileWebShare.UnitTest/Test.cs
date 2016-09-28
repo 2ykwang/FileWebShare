@@ -8,6 +8,7 @@ namespace FileWebShare.UnitTest
 		[Test()]
 		public void TestCase()
 		{
+			Assert.AreEqual(5, 4);
 		}
 	}
 }

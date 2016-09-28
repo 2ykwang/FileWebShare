@@ -22,7 +22,8 @@ namespace FileWebShare
 			RequestRoute requestRoute = new RequestRoute();
 
 			requestRoute.ControllerMethod = _serverSetting.DefaultMethod;
-			requestRoute.ControllerName = _serverSetting.DefaultController; 
+			requestRoute.ControllerName = _serverSetting.DefaultController;
+
 			int mehtodSegNum = 0;
 			if (_uriData.GetSegmentCount() < 1) // 세그먼트가 존재하지 않을경우 기본값 할당
 			{ 
@@ -44,8 +45,11 @@ namespace FileWebShare
 			}
 			else
 			{
-				// 해당하는 컨트롤러 존재하지 않을경우  
-				requestRoute.ControllerName = _uriData.GetSegment(0);
+				// 해당하는 컨트롤러 존재하지 않을경우
+				var firstSegment = _uriData.GetSegment(0);
+
+				if(firstSegment.Length > 0)
+					requestRoute.ControllerName = firstSegment;
 
 				if (_uriData.GetSegmentCount()>1)
 					requestRoute.ControllerMethod = _uriData.GetSegment(0);

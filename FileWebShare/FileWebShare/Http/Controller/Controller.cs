@@ -4,7 +4,7 @@ namespace FileWebShare
 	public abstract class Controller : iController
 	{
 		 
-		public ClientData ClientData { get;  private set; }
+		public Client ClientData { get;  private set; }
 
 
 		protected void Redirect(string url)
@@ -19,7 +19,7 @@ namespace FileWebShare
 			ClientData.Response.Headers["Content-Length"] = htmlText.Length.ToString();
 		}
 
-		public void Initialize(ClientData clientData)
+		public void Initialize(Client clientData)
 		{
 			ClientData = clientData;
 		}

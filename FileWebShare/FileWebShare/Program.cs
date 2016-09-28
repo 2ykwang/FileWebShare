@@ -6,13 +6,14 @@ using System.Windows.Forms;
 using System.Net;
 using System.Reflection;
 using System.Collections;
+using System.Data.SQLite;
+
 namespace FileWebShare
 {
     static class Program
     { 
         static void Main()
-        { 
-
+		{
 			ServerSetting setting = new ServerSetting
 			{
 				ControllerTrigger = "c",
@@ -28,7 +29,10 @@ namespace FileWebShare
 			ServerListener Listener = new ServerListener(setting);
 
 			Listener.Start();
-			Console.ReadLine();
+			while (true)
+			{
+				System.Threading.Thread.Sleep(1000);
+			}
 		}
 	} 
 }

@@ -10,6 +10,8 @@ namespace FileWebShare
 
 		public bool isFile { get; set; }
 
+		public string FilePath { get; set; }
+
 		public ResponseCode ResponseCode { get; set; }
 
 		public RequestRoute RequestRoute { get; set; }
