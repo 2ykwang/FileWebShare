@@ -17,13 +17,15 @@ namespace FileWebShare
 
 		public void RequestProcess()
 		{
+			InitializeResponse(_client.Response);
+
 			CreateResponse();
 			 
 			SendResponse(_client);
 		}
 		private void CreateResponse()
 		{ 
-			Route route = _serverSetting.RouteList.HasController(_client.Response.RequestRoute.ControllerName);
+			Route route = _serverSetting.RouteList.HasController(_client.Response.RequestRoute.ControllerName); 
 
 #if DEBUG
 			Console.WriteLine(_client.Request.HeaderCollection.ToString());
@@ -57,54 +59,58 @@ namespace FileWebShare
 		{
 			NetworkStream networkStream = client.TcpClient.GetStream();
 
-			byte[] buf = new byte[1024];
-			
+			byte[] buf = new byte[_serverSetting.BufferSize]; 
+
 			//Send header
 			string header = ResponseHeaderBuilder(client.Response.Headers, client.Response.ResponseCode);
-			buf = System.Text.Encoding.UTF8.GetBytes($"{header}");
-			SendData(buf, networkStream); 
 
-			if(client.Response.isFile)
+			buf = System.Text.Encoding.UTF8.GetBytes($"{header}");
+			SendData(networkStream, buf,0, buf.Length);
+
+			if (client.Response.isFile)
 			{
-				SendFile(client.Response.FilePath, networkStream);
+				SendFile(networkStream, client.Response.FilePath);
 			}
 			else
-			{ 
-				buf = System.Text.Encoding.UTF8.GetBytes($"{client.Response.Body}"); 
-				SendData(buf, networkStream);
+			{
+				buf = System.Text.Encoding.UTF8.GetBytes(client.Response.Body.ToString());
+
+				int offset = 0,
+					sendBufLength = 0,
+					bufLength = buf.Length;
+
+				while(offset < bufLength )
+				{ 
+					sendBufLength = (offset + _serverSetting.BufferSize - bufLength < 1)?
+						_serverSetting.BufferSize: bufLength-offset ;
+
+					Console.WriteLine(sendBufLength);
+
+					SendData(networkStream, buf, offset, sendBufLength);
+					offset += sendBufLength;
+
+
+				}
 			}
 			//Send body
 			networkStream.Close();
 		}
 
-
-		private void SendFile(string path,Stream networkStream)
-		{ 
-			BinaryReader binReader = new BinaryReader(new StreamReader(path).BaseStream);
-
-			byte[] readBytes = new byte[1024];
-
-			while ((readBytes = binReader.ReadBytes(1024)).Length > 0)
-			{
-				try
-				{
-					SendData(readBytes, networkStream);
-				}
-				catch(IOException)
-				{
-					Console.WriteLine("데이터 전송도중 연결 끊김");
-					break;
-				}
-			}
-			binReader.Close();
+		private void InitializeResponse(Response response)
+		{
+			response.Headers["Server"] = _serverSetting.ServerName;
+			response.Headers["Connection"] = "close";
+			response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
 		}
+
 		private void SetNotFound(Response response)
 		{
 			string data = "<html><head></head><body>Not Found!</body></html>";
+
 			_client.Response.ResponseCode = ResponseCode.NotFound;
 			_client.Response.Headers["Content-Type"] = "text/html charset=utf8";
 			_client.Response.Headers["Content-Length"] = data.Length.ToString();
-			_client.Response.Body = data;
+			_client.Response.Body = new System.Text.StringBuilder(data);
 
 			_client.Response.FilePath = "";
 			_client.Response.isFile = false; 
@@ -116,9 +122,8 @@ namespace FileWebShare
 			header += $"{headerCollection.ToString()}{Environment.NewLine}";
 			return header;
 		}
-
-
-		private static void SendData(byte[] data, Stream stream)
+		 
+		private static void SendData(Stream stream, byte[] data,int offset,int length)
 		{
 			try
 			{
@@ -132,6 +137,27 @@ namespace FileWebShare
 			{
 				System.Console.WriteLine("SendData Error: " + e.ToString());
 			}
+		}
+
+		private void SendFile(Stream stream, string path)
+		{
+			BinaryReader binReader = new BinaryReader(new StreamReader(path).BaseStream);
+
+			byte[] readBytes = new byte[_serverSetting.BufferSize];
+
+			while ((readBytes = binReader.ReadBytes(_serverSetting.BufferSize)).Length > 0)
+			{
+				try
+				{
+					SendData(stream, readBytes,0 ,readBytes.Length);
+				}
+				catch (IOException)
+				{
+					Console.WriteLine("데이터 전송도중 연결 끊김");
+					break;
+				}
+			}
+			binReader.Close();
 		}
 	}
 }

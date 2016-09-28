@@ -17,7 +17,7 @@ namespace FileWebShare
 
 		public void Process(TcpClient tcpClient, Request request)
 		{ 
-			byte[] buf = new byte[1024];
+			byte[] buf = new byte[ServerSetting.BufferSize];
 			NetworkStream networkStream = tcpClient.GetStream();
 
 			networkStream.Read(buf, 0, buf.Length); 

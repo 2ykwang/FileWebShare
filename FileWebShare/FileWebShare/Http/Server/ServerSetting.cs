@@ -22,6 +22,13 @@ namespace FileWebShare
 		/// <value>The default controller.</value>
 		public string DefaultController { get; set; }
 
+
+		/// <summary>
+		/// Send, Receive Buffer SIze
+		/// </summary>
+		/// <value>The buffer size</value>
+		public int BufferSize { get; set; }
+
 		/// <summary>
 		/// Gets or sets the default method.
 		/// </summary>

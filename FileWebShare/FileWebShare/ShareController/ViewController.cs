@@ -24,8 +24,19 @@ namespace FileWebShare.ShareController
 				"); 
 		}
 		public void test(string test, string test2)
-		{
-			SetFile(@"D:\개발\Projects\GnuboardExtractor\GnuboardExtractor\bin\Debug\그누보드 등록기.exe"); 
+		{ 
+			WriteHtml(
+				$@"
+<!DOCTYPE HTML>
+<html>
+	<head>
+	</head>
+	<body>
+		View 컨트롤러를 사용하여 Test 메소드를 요청했고 <br/>
+		{test}를 변수로 넘겼다 이기야~! 
+	</body>
+</html>
+				");
 		}
 	}
 }

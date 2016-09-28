@@ -1,5 +1,7 @@
 ﻿using System;
-using System.IO; 
+using System.IO;
+using System.Text;
+using System.Web;
 
 namespace FileWebShare
 {
@@ -13,11 +15,17 @@ namespace FileWebShare
 			ClientData.Response.ResponseCode = ResponseCode.Moved;
 			ClientData.Response.Headers["Location"] = url;
 		}
+		protected void WriteHtml(string htmlText)
+		{
+			ClientData.Response.Body.AppendLine(htmlText);
+			ClientData.Response.Headers["Content-Type"] = "text/html; charset=utf-8";
+			ClientData.Response.Headers["Content-Length"] =  ClientData.Response.Body.Length.ToString();
+		}
 		protected void SetHtml(string htmlText)
 		{
-			ClientData.Response.Body = htmlText;
+			ClientData.Response.Body = new StringBuilder(htmlText);
 			ClientData.Response.Headers["Content-Type"] = "text/html; charset=utf-8";
-			ClientData.Response.Headers["Content-Length"] = htmlText.Length.ToString();
+			ClientData.Response.Headers["Content-Length"] = htmlText.Length.ToString(); 
 		}
 		protected void SetFile(string file)
 		{

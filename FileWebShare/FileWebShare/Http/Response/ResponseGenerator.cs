@@ -16,9 +16,7 @@ namespace FileWebShare
 		}
 
 		public void Process(Response response)
-		{
-			InitializeResponse(response);
-			 
+		{  
 			HttpGetCollection getCollection = new HttpGetCollection();
 			getCollection.AddParameterFromQueryString(Request.Uri.Query);
 
@@ -34,12 +32,6 @@ namespace FileWebShare
 				 getCollection[ServerSetting.MethodTrigger] : ServerSetting.DefaultMethod;
 			*/
 			response.RequestRoute = requestRoute;
-		}
-		private void InitializeResponse(Response response)
-		{ 
-			response.Headers["Server"] = ServerSetting.ServerName;
-			response.Headers["Connection"] = "close";
-			response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
-		}
+		} 
 	}
 }
